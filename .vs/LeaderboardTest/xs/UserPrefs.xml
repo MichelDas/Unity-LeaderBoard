@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{C3401444-41B1-61FB-900D-2A5F0CAAA778}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UIShower.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ServerManager.cs" Line="31" Column="37" />
+      <File FileName="Assets/Scripts/FacebookManager.cs" Line="11" Column="1" />
+      <File FileName="Assets/Scripts/SimpleJSON/SimpleJSON.cs" Line="1367" Column="2" />
+      <File FileName="Assets/Scripts/Web.cs" Line="11" Column="171" />
+      <File FileName="Assets/Scripts/UIShower.cs" Line="7" Column="11" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="209e9f4d-83b1-4dd0-9ad7-6a31ed93b87d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
