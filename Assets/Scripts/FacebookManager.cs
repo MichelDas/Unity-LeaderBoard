@@ -174,7 +174,6 @@ public class FacebookManager : MonoBehaviour
             }
         }
         string myPermsStr = string.Join(",", myPerms.ToArray());
-        Debug.Log("info not working " +myPermsStr);
         FB.API("/me?fields=" + myPermsStr, HttpMethod.GET, OnUserInfoGrabbed);
         FB.API("me/picture?type=square&height=128&width=128", HttpMethod.GET, FbGetPicture);
     }
@@ -194,10 +193,9 @@ public class FacebookManager : MonoBehaviour
             }
             if (_ReqEmail)
             {
-               //    myEmail = _FbUserResp.ResultDictionary["email"].ToString();
-                myEmail = "michel@gmail.com";
+                //    myEmail = _FbUserResp.ResultDictionary["email"].ToString();
+                myEmail = "xyz@gmail.com";
             }
-            Debug.Log("adding to server: " +myFbId +" " +myName);
             StartCoroutine(ServerManager.Instance.LogIn(myFbId, myName, myEmail, myPic));
             if (UIShower.instance)
                 UIShower.instance.SetUIElements(myName);
@@ -330,10 +328,17 @@ public class FacebookManager : MonoBehaviour
         {
             var dictionary = (Dictionary<string,object>) Facebook.MiniJSON.Json.Deserialize(result.RawResult);
             var friendlist = (List<object>)dictionary["data"];
-            Debug.Log("will show friends list");
+  //          Debug.Log("will show friends list");
+            List<string> ids = new List<string>();
             foreach (var dict in friendlist)
-                Debug.Log(((Dictionary<string, object>)dict)["name"] +" " +((Dictionary<string, object>)dict)["id"]);
+            {
+//                Debug.Log(((Dictionary<string, object>)dict)["name"] + " " + ((Dictionary<string, object>)dict)["id"]);
+                ids.Add(((Dictionary<string, object>)dict)["id"].ToString());
+            }
+            ServerManager.Instance.SaveFriends(ids);
         });
     }
+
+
 
 }

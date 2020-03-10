@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using SimpleJSON;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -10,6 +11,11 @@ public class ServerManager : MonoBehaviour
 
     public bool ServerLoggedIn = false;
 
+    public List<string> FriendIds;
+    public string[] friendsData;
+
+    
+
     private static ServerManager instance;
     public static ServerManager Instance
     {
@@ -18,21 +24,26 @@ public class ServerManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        FriendIds = new List<string>();
     }
 
     public IEnumerator LogIn(string fbId, string name, string email, Texture myPic)
     {
         ServerLog("Logging.....");
-        string logInString = "http://localhost/LeaderBoard/GameServices.php";
+        string logInString = "http://localhost/LeaderBoard/login.php";
 
         WWWForm form = new WWWForm();
-        form.AddField("fbId", name );
+        form.AddField("fbId", fbId );
         form.AddField("name", name);
         form.AddField("email", email);
 
         UnityWebRequest www = UnityWebRequest.Post(logInString, form);
         www.chunkedTransfer = false;
         yield return www.SendWebRequest();
+
+
+        string userDataString = www.downloadHandler.text;
+        Debug.Log(userDataString);
 
         if (www.error == null)
         {
@@ -63,5 +74,35 @@ public class ServerManager : MonoBehaviour
     public void ServerLog(string msg)
     {
         Debug.Log("<Server> " + msg);
+    }
+
+    public void SaveFriends(List<string> fdList)
+    {
+        FriendIds = new List<string>();
+        FriendIds = fdList;
+    }
+
+    public void friendsFromSErver()
+    {
+        StartCoroutine("GetFriendsPlayingThisGameFromServer");
+    }
+
+    private IEnumerator GetFriendsPlayingThisGameFromServer()
+    {
+        ServerLog("Getting Friends Scores .....");
+
+
+        //WWW users = new WWW(url);
+
+        WWWForm form = new WWWForm();
+        form.AddField("action", "login");
+        string getScoreURL = "http://localhost/LeaderBoard/getScore.php";
+        UnityWebRequest www = UnityWebRequest.Post(getScoreURL, form);
+        www.chunkedTransfer = false;
+        yield return www.SendWebRequest();
+        string userDataString = www.downloadHandler.text;
+        Debug.Log(userDataString);
+        friendsData = userDataString.Split(';');
+
     }
 }

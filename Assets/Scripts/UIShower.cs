@@ -22,8 +22,8 @@ public class UIShower : MonoBehaviour
 
     public void SetUIProfilePicture(Texture profilepic)
     {
-        if (profilepic != null)
-            Debug.Log("profile picture should be shown");
+     //   if (profilepic != null)
+       //     Debug.Log("profile picture should be shown");
         profilePicture.sprite = Sprite.Create(profilepic as Texture2D, new Rect(0, 0, 128, 128), new Vector2());
 
     }
